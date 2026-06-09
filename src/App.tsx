@@ -6,6 +6,7 @@ import Index from './pages/Index'
 import NotFound from './pages/NotFound'
 import Layout from './components/Layout'
 import { ThemeProvider } from './components/theme-provider'
+import { ExecutionModal } from './components/ExecutionModal'
 
 const App = () => (
   <ThemeProvider defaultTheme="light" storageKey="agents-theme">
@@ -13,6 +14,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <ExecutionModal />
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />

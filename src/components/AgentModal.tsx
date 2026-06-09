@@ -7,7 +7,7 @@ import useMainStore from '@/stores/main'
 import { AGENTS } from '@/data/agents'
 
 export function AgentModal() {
-  const { selectedAgent, setSelectedAgent } = useMainStore()
+  const { selectedAgent, setSelectedAgent, setExecutingAgent } = useMainStore()
   const { toast } = useToast()
 
   if (!selectedAgent) return null
@@ -85,10 +85,18 @@ export function AgentModal() {
                 <Copy className="h-4 w-4" />
               </Button>
             </div>
-            <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
-              Copie o snippet acima e cole na sua interface de chat favorita para direcionar sua
-              solicitação especificamente para este agente.
-            </p>
+            <div className="flex items-center justify-between mt-4">
+              <p className="text-xs text-muted-foreground leading-relaxed flex-1 pr-4">
+                Copie o snippet acima ou execute o agente diretamente no ambiente integrado.
+              </p>
+              <Button
+                onClick={() => setExecutingAgent(selectedAgent)}
+                className="bg-[oklch(48%_0.15_242)] hover:bg-[oklch(45%_0.15_242)] text-white shadow-md active:scale-95 transition-all h-9"
+              >
+                <TerminalSquare className="w-4 h-4 mr-2" />
+                Executar
+              </Button>
+            </div>
           </div>
 
           {relatedAgents.length > 0 && (

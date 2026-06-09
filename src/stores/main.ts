@@ -12,6 +12,8 @@ interface MainStore {
   filteredAgents: Agent[]
   selectedAgent: Agent | null
   setSelectedAgent: (a: Agent | null) => void
+  executingAgent: Agent | null
+  setExecutingAgent: (a: Agent | null) => void
   availableSquads: string[]
   availableTypes: string[]
 }
@@ -23,6 +25,7 @@ export function MainProvider({ children }: { children: ReactNode }) {
   const [selectedSquads, setSelectedSquads] = useState<string[]>([])
   const [selectedTypes, setSelectedTypes] = useState<string[]>([])
   const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null)
+  const [executingAgent, setExecutingAgent] = useState<Agent | null>(null)
 
   const availableSquads = useMemo(() => Array.from(new Set(AGENTS.map((a) => a.squad))).sort(), [])
   const availableTypes = useMemo(() => Array.from(new Set(AGENTS.map((a) => a.type))).sort(), [])
@@ -69,6 +72,8 @@ export function MainProvider({ children }: { children: ReactNode }) {
     filteredAgents,
     selectedAgent,
     setSelectedAgent,
+    executingAgent,
+    setExecutingAgent,
     availableSquads,
     availableTypes,
   }
