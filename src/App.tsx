@@ -7,22 +7,25 @@ import NotFound from './pages/NotFound'
 import Layout from './components/Layout'
 import { ThemeProvider } from './components/theme-provider'
 import { ExecutionModal } from './components/ExecutionModal'
+import { MainProvider } from '@/stores/main'
 
 const App = () => (
   <ThemeProvider defaultTheme="light" storageKey="agents-theme">
-    <BrowserRouter future={{ v7_startTransition: false, v7_relativeSplatPath: false }}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <ExecutionModal />
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Index />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </TooltipProvider>
-    </BrowserRouter>
+    <MainProvider>
+      <BrowserRouter future={{ v7_startTransition: false, v7_relativeSplatPath: false }}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <ExecutionModal />
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Index />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </TooltipProvider>
+      </BrowserRouter>
+    </MainProvider>
   </ThemeProvider>
 )
 
