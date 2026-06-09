@@ -1,16 +1,28 @@
-import { Bot } from 'lucide-react'
+import { ReportsHeader } from './reports/ReportsHeader'
+import { ReportsFilters } from './reports/ReportsFilters'
+import { ReportsOverview } from './reports/ReportsOverview'
+import { TopAgentsChart } from './reports/charts/TopAgentsChart'
+import { SquadSuccessChart } from './reports/charts/SquadSuccessChart'
+import { TimeTrendChart } from './reports/charts/TimeTrendChart'
+import { ReportsTable } from './reports/ReportsTable'
+import { ReportsProvider } from '@/hooks/use-reports'
 
 export default function Reports() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center animate-fade-in">
-      <div className="w-16 h-16 rounded-2xl bg-muted/50 flex items-center justify-center mb-5 border border-border/50">
-        <Bot className="w-8 h-8 text-muted-foreground" />
+    <ReportsProvider>
+      <div className="w-full max-w-[1400px] mx-auto p-4 md:p-6 lg:p-8 space-y-6 animate-fade-in pb-16">
+        <ReportsHeader />
+        <ReportsFilters />
+        <ReportsOverview />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <TopAgentsChart />
+          <SquadSuccessChart />
+          <div className="lg:col-span-2">
+            <TimeTrendChart />
+          </div>
+        </div>
+        <ReportsTable />
       </div>
-      <h2 className="text-2xl font-bold mb-2">Relatórios (Em Breve)</h2>
-      <p className="text-muted-foreground max-w-md">
-        Análises aprofundadas e gráficos sobre o uso dos seus agentes estarão disponíveis nesta
-        seção futuramente.
-      </p>
-    </div>
+    </ReportsProvider>
   )
 }
