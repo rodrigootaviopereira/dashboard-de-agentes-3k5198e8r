@@ -29,11 +29,17 @@ export function MainProvider({ children }: { children: ReactNode }) {
 
   const filteredAgents = useMemo(() => {
     return AGENTS.filter((a) => {
-      const q = search.toLowerCase()
+      const normalize = (str: string) =>
+        str
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+      const q = normalize(search)
       const matchSearch = search
-        ? a.name.toLowerCase().includes(q) ||
-          a.id.toLowerCase().includes(q) ||
-          a.squad.toLowerCase().includes(q)
+        ? normalize(a.name).includes(q) ||
+          normalize(a.id).includes(q) ||
+          normalize(a.description).includes(q) ||
+          normalize(a.type).includes(q)
         : true
       const matchSquad = selectedSquads.length > 0 ? selectedSquads.includes(a.squad) : true
       const matchType = selectedTypes.length > 0 ? selectedTypes.includes(a.type) : true
