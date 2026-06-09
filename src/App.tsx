@@ -9,6 +9,10 @@ import Layout from './components/Layout'
 import { ThemeProvider } from './components/theme-provider'
 import { ExecutionModal } from './components/ExecutionModal'
 import { MainProvider } from '@/stores/main'
+import History from './pages/History'
+import Reports from './pages/Reports'
+import Settings from './pages/Settings'
+import { Navigate } from 'react-router-dom'
 
 const App = () => (
   <ThemeProvider defaultTheme="light" storageKey="agents-theme">
@@ -21,8 +25,11 @@ const App = () => (
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route element={<Layout />}>
-              <Route path="/" element={<Index />} />
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Index />} />
+              <Route path="/history" element={<History />} />
+              <Route path="/reports" element={<Reports />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
